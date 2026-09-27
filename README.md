@@ -1,1 +1,1 @@
-# alphafx-platform
+alphafx-platform
