@@ -1,1 +1,77 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaFX Terminal</title>
+    <!-- Tailwind CSS CDN for mobile dark styling -->
+    <script src="https://tailwindcss.com"></script>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="bg-[#0b0e14] text-slate-100 font-sans min-h-screen flex flex-col">
+
+    <!-- Header Panel -->
+    <header class="bg-[#111622] border-b border-[#1e2640] p-4 flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center">
+        <div class="flex items-center gap-2">
+            <span class="text-lg font-black tracking-wider text-white">AlphaFX <span class="text-[#ff444f]">Terminal</span></span>
+            <span id="connection-status" class="bg-amber-950/60 border border-amber-800 text-amber-400 text-[10px] px-2 py-0.5 rounded-full font-medium animate-pulse">Connecting...</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <select id="asset-selector" class="bg-[#1e2640] border border-slate-700 rounded px-2.5 py-1 text-xs font-semibold text-white focus:outline-none">
+                <option value="R_10">Volatility 10 Index</option>
+                <option value="R_50">Volatility 50 Index</option>
+                <option value="R_100" selected>Volatility 100 Index</option>
+            </select>
+            <button id="login-btn" class="bg-[#ff444f] hover:bg-[#e03a44] text-white text-xs font-bold px-3 py-1.5 rounded transition">
+                Link Deriv
+            </button>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-[#111622]/50 border-b border-[#1e2640] px-4 flex gap-1 text-xs font-bold">
+        <button onclick="switchTab('trader')" id="tab-trader" class="px-3 py-3 border-b-2 border-[#ff444f] text-white">DTrader</button>
+        <button onclick="switchTab('digits')" id="tab-digits" class="px-3 py-3 border-b-2 border-transparent text-slate-400">Digit Stats</button>
+        <button onclick="switchTab('bot')" id="tab-bot" class="px-3 py-3 border-b-2 border-transparent text-slate-400">Trading Bot</button>
+    </nav>
+
+    <!-- Main Views Canvas -->
+    <main class="flex-1 p-4 flex flex-col gap-4">
+        
+        <!-- Tab 1: DTrader View -->
+        <div id="view-trader" class="bg-[#111622] border border-[#1e2640] rounded-xl p-4 flex-1 flex flex-col justify-center items-center">
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Live Market Feed</h3>
+            <div id="price-display" class="text-3xl font-black font-mono tracking-wider text-cyan-400 bg-slate-950 px-5 py-3 rounded border border-slate-800">
+                LOADING...
+            </div>
+            <div class="w-full mt-6 space-y-2">
+                <button class="w-full bg-emerald-600 font-bold py-3 rounded-lg text-xs uppercase tracking-wide">Purchase Rise</button>
+                <button class="w-full bg-rose-600 font-bold py-3 rounded-lg text-xs uppercase tracking-wide">Purchase Fall</button>
+            </div>
+        </div>
+
+        <!-- Tab 2: Digit Stats View -->
+        <div id="view-digits" class="bg-[#111622] border border-[#1e2640] rounded-xl p-4 flex-1 hidden space-y-2">
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">100-Tick Last Digit Analyzer</h3>
+            <div id="digit-bars-container" class="space-y-2.5">
+                <!-- JavaScript updates progress lines here dynamically -->
+            </div>
+        </div>
+
+        <!-- Tab 3: Bot View -->
+        <div id="view-bot" class="bg-[#111622] border border-[#1e2640] rounded-xl p-4 flex-1 hidden flex flex-col gap-3">
+            <div class="flex justify-between items-center">
+                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Martingale Bot</h3>
+                <button id="bot-toggle-btn" class="bg-emerald-600 text-white font-bold text-xs px-4 py-1.5 rounded uppercase">Start Bot</button>
+            </div>
+            <div id="bot-logs" class="flex-1 bg-slate-950 rounded border border-slate-800 p-3 font-mono text-[11px] h-48 overflow-y-auto text-emerald-400 space-y-1">
+                <div class="text-slate-600">Engine offline. Link account and press start...</div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
